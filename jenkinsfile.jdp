@@ -8,7 +8,7 @@ pipeline {
         }
         stage('BUILD') {
             steps {
-                eco 'BUILD SUCCSESS'
+                echo 'BUILD SUCCSESS'
             }
         }
         stage('TEST') {
