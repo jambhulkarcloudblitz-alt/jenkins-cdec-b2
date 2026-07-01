@@ -8,22 +8,23 @@ pipeline {
         }
         stage ('BUILD') {
             steps {
-
+                sh '''cd backend
+                    mvn clean package -DskipTests'''
             }
         }
         stage ('TEST') {
             steps {
-
+                echo "tets"
             }
         }
         stage ('QUALITY-GATE') {
             steps {
-
+                echo "tets"
             }
         }
         stage ('S3-UPLOAD') {
             steps {
-
+                echo "tets"
             }
         }
     }
