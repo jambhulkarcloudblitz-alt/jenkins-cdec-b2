@@ -12,16 +12,25 @@ pipeline {
                     mvn clean package -DskipTests'''
             }
         }
+        // stage ('TEST') {
+        //     steps {
+        //         sh '''cd backend
+        //             mvn  sonar:sonar \\
+        //             -Dsonar.projectKey=studentapp \\
+        //             -Dsonar.projectName=\'studentapp\' \\
+        //             -Dsonar.host.url=http://54.177.15.249:9000 \\
+        //             -Dsonar.token=sqp_254f1898b4e2e7021939a84acaa1bffed1b71d37
+        //             '''
+        //     }
+        // }
         stage ('TEST') {
             steps {
-                sh '''cd backend
-                    mvn  sonar:sonar \\
-                    -Dsonar.projectKey=studentapp \\
-                    -Dsonar.projectName=\'studentapp\' \\
-                    -Dsonar.host.url=http://54.177.15.249:9000 \\
-                    -Dsonar.token=sqp_254f1898b4e2e7021939a84acaa1bffed1b71d37
-                    '''
+                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-cred') {
+                   sh '''cd backend
+                   mvn sonar:sonar  -Dsonar.projectKey=studentapp
+                   '''
             }
+        }
         }
         stage ('QUALITY-GATE') {
             steps {
