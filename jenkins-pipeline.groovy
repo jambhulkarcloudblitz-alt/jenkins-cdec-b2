@@ -41,7 +41,7 @@ pipeline {
         }
         stage ('S3-UPLOAD') {
             steps {
-                echo "tets"
+                sh 'aws s3 cp backend/target/student-registration-backend-0.0.1-SNAPSHOT.jar s3://jenkins-7123/studentapp.jar'
             }
         }
     }
