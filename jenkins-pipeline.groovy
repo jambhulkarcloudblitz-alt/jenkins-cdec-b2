@@ -34,7 +34,9 @@ pipeline {
         }
         stage ('QUALITY-GATE') {
             steps {
-                echo "tets"
+                timeout(10) {
+                    waitForQualityGate abortPipeline: true , credentialsId: 'sonar-cred'
+                    }
             }
         }
         stage ('S3-UPLOAD') {
